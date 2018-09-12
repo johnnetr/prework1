@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { Button } from 'react-native-elements';
-import * as firebase from 'firebase';
+import { StyleSheet, Text, TextInput, View, Image } from 'react-native';
+import { Button } from '../../node_modules/react-native-elements';
+import * as firebase from '../../node_modules/firebase';
 
 
 export default class Login extends React.Component {
@@ -37,55 +37,84 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>
-          Try this account
-          </Text>}
+      <View style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+        }}>
+          <Image
+            style={{
+              height: 800,
+              width: 400
+            }}
+            source={require('../assets/buttonCreate.gif')}
+          />
+        </View>
+        <View
+          style={{
+            paddingVertical: 10,
+            paddingHorizontal: 15,
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            justifyContent: 'center',
+            borderRadius: 10,
+            alignItems: 'center',
+            marginTop: 200
+          }}
+        >
 
-        <View>
-          <Text>
-            email: test@hotmail.com ||
+          {/*           <View>
+            <Text>
+              email: test@hotmail.com ||
+
+          </Text>
+          </View> */}
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder='Your email...'
+            onChangeText={email => this.setState({ email })}
+            value={this.state.email}
+          />
+          {/*           <Text>
+
             password: angereda
-          </Text>}
-          </View>
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Email"
-          onChangeText={email => this.setState({ email })}
-          value={this.state.email}
-        />
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Password"
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-        />
-        <Button
+          </Text>} */}
+          <TextInput
+            style={styles.textInput}
+            secureTextEntry
+            autoCapitalize="none"
+            placeholder='Your password...'
+            onChangeText={password => this.setState({ password })}
+            value={this.state.password}
+          />
+          <Button
 
-          title='Login with email'
-          onPress={this.loginWithEmail}
-          buttonStyle={{
-            backgroundColor: "rgb(128,128,128)",
-            borderColor: "transparent",
-            borderWidth: 0,
-            borderRadius: 20,
-            marginTop: 10,
-          }}
-        />
-        <Button
+            title='Login / Registrate'
+            onPress={this.loginWithEmail}
+            buttonStyle={{
+              backgroundColor: "rgb(128,128,128)",
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderRadius: 20,
+              marginTop: 10,
+            }}
+          />
+          <Button
 
-          title="Facebook Login"
-          onPress={() => this.loginWithFacebook()}
-          buttonStyle={{
-            backgroundColor: "rgb(0,0,205)",
-            borderColor: "transparent",
-            borderWidth: 0,
-            borderRadius: 20,
-            marginTop: 10,
-          }}
-        />
+            title="Facebook Login"
+            onPress={() => this.loginWithFacebook()}
+            buttonStyle={{
+              backgroundColor: "#3b5999",
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderRadius: 20,
+              marginTop: 10,
+            }}
+          />
+        </View>
       </View>
     )
   }
@@ -100,9 +129,19 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    width: '90%',
+    width: 300,
     borderColor: 'gray',
     borderWidth: 1,
     marginTop: 8,
+    borderRadius: 5
+  },
+  longTextInput: {
+    height: 40,
+    width: '90%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingBottom: 100,
+    marginVertical: 20,
+    paddingTop: 20,
   },
 })

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
 import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { Tile, Button } from 'react-native-elements';
 import * as firebase from 'firebase';

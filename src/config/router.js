@@ -3,18 +3,48 @@ import { createBottomTabNavigator, createStackNavigator, createSwitchNavigator }
 import { Icon } from 'react-native-elements';
 import fire from './fire';
 
-import Feeds from '../screens/Feeds';
-import Me from '../screens/Me';
+import MyShop from '../screens/MyShop';
+import Profile from '../screens/Profile';
 import Login from '../component/Login';
+import Loading from '../component/Loading';
 import Post from '../screens/Post';
+import Main from '../screens/Main';
+import ProductDetail from '../screens/ProductDetail';
+import Checkout from '../screens/Checkout';
+import Order from '../screens/Order';
+import Setting from '../screens/Setting';
 
-
-export const JobStack = createStackNavigator({
-  Feeds: {
-    screen: Feeds,
+const DetailCheckout = createStackNavigator({
+  ProductDetailScreen: {
+    screen: ProductDetail,
     navigationOptions: {
-      title: 'All Tweets'
-    }
+      header: null,
+      },
+  },
+  CheckoutScreen: {
+    screen: Checkout,
+    navigationOptions: {
+      header: null,
+      },
+  }
+})
+
+const MainScreenStack = createStackNavigator({
+  MainScreen: {
+    screen: Main,
+  },
+  ProductDetailScreen: {
+    screen: DetailCheckout,
+    navigationOptions: {
+      header: null,
+      },
+  }
+})
+
+
+const MyShopStack = createStackNavigator({
+  MyShop: {
+    screen: MyShop,
   },
   Post: {
     screen: Post,
@@ -22,13 +52,16 @@ export const JobStack = createStackNavigator({
       header: null,
     }
   },
+  ProductDetailScreen: {
+    screen: ProductDetail,
+  }
 })
 
 
 
-export const UserProfile = createStackNavigator({
-  Me: {
-    screen: Me,
+const UserProfile = createStackNavigator({
+  Profile: {
+    screen: Profile,
     navigationOptions: {
       header: null,
       tabBarVisible: false,
@@ -36,21 +69,24 @@ export const UserProfile = createStackNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name='account-circle' size={35} color={tintColor} />,
     }
   },
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null,
-    }
+  SettingScreen: {
+    screen: Setting,
+  },
+  OrderScreen: {
+    screen: Order,
   }
 });
 
 
-export const Tabs = createBottomTabNavigator({
+const Tabs = createBottomTabNavigator({
 
-  Feed: {
-    screen: JobStack,
+  MainScreen: {
+    screen: MainScreenStack
+  },
+
+  MyShop: {
+    screen: MyShopStack,
     navigationOptions: {
-      tabBarLabel: 'Tweets',
       tabBarIcon: ({ tintColor }) => <Icon name='list' size={35} color={tintColor} />,
     }
   },
@@ -63,4 +99,15 @@ export const Tabs = createBottomTabNavigator({
     }
   },
 })
+
+export const AuthFlow = createSwitchNavigator(
+  {
+    Login: Login,
+    Loading: Loading,
+    Tabs: Tabs,
+  },
+  {
+    initialRouteName: 'Loading',
+  }
+)
 
